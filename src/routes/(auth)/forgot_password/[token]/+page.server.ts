@@ -6,6 +6,9 @@ import { z } from 'zod';
 const schema = z.object({
     password: z.string().nonempty().min(6),
     passwordConfirm: z.string().nonempty().min(6),
+}).refine((data) => data.password === data.passwordConfirm, {
+    message: 'Passwords didn\'t match',
+    path: ['passwordConfirm']
 });
 
 export const load = async ({ request }) => {
