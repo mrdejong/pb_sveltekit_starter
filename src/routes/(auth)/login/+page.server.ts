@@ -1,5 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit';
-import { message, superValidate } from 'sveltekit-superforms';
+import { message, setMessage, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { z } from 'zod';
 
@@ -19,10 +19,16 @@ export const actions = {
         const form = await superValidate(request, zod(schema));
 
         if (!form.valid) {
+            setMessage(form, 'Please correct all inputs')
             return fail(400, { form });
         }
 
-        await locals.users.authWithPassword(form.data.email, form.data.password);
+        try {
+            await locals.users.authWithPassword(form.data.email, form.data.password);
+        } catch (e: any) {
+            setMessage(form, 'Please enter the correct email or password');
+            return fail(400, { form })
+        }
 
         return redirect(303, '/');
     }

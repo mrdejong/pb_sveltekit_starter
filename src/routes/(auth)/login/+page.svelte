@@ -1,14 +1,22 @@
 <script lang="ts">
-	import { superForm } from 'sveltekit-superforms';
+	import { browser } from '$app/environment';
+	import { goto } from '$app/navigation';
+	import Alert from '$components/feedback/alert.svelte';
+	import Field from '$components/form/field.svelte';
 	import { auth_title } from '$lib/store';
 	import { onMount } from 'svelte';
-	import Field from '../../../components/form/field.svelte';
-	import { enhance } from '$app/forms';
+	import { superForm } from 'sveltekit-superforms';
 
 	let { data } = $props();
 
-	const { form, errors, message } = superForm(data.form, {
-		applyAction: false
+	let isFail = $state(false);
+
+	const { form, errors, message, enhance } = superForm(data.form, {
+		applyAction: false,
+		onResult(event) {
+			if (event.result.status === 400) isFail = true;
+			if (event.result.type === 'redirect' && browser) goto(event.result.location);
+		}
 	});
 
 	onMount(() => {
@@ -18,7 +26,11 @@
 
 <form class="flex flex-col px-12 h-full py-10 justify-center" method="POST" use:enhance>
 	{#if $message}
-		<div>{$message}</div>
+		{#if isFail}
+			<Alert type="error">{$message}</Alert>
+		{:else}
+			<Alert type="info">{$message}</Alert>
+		{/if}
 	{/if}
 
 	<Field
