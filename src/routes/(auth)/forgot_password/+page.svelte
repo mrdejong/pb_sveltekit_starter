@@ -3,12 +3,11 @@
 	import { onMount } from 'svelte';
 	import { superForm } from 'sveltekit-superforms';
 	import Field from '../../../components/form/field.svelte';
-	import { enhance } from '$app/forms';
 	import Alert from '../../../components/feedback/alert.svelte';
 
 	let { data } = $props();
 
-	const { form, errors, message } = superForm(data.form, {
+	const { form, errors, message, enhance } = superForm(data.form, {
 		applyAction: false
 	});
 
