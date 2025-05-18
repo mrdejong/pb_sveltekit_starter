@@ -10,11 +10,19 @@
 
 	let { children, style = 'none', type = 'none' }: Props = $props();
 
-	let alert_cls = type !== 'none' ? `alert-${type}` : '';
+	let alert_cls = $derived(type !== 'none' ? `alert-${type}` : '');
+	let style_cls = $derived(style !== 'none' ? `alert-${style}` : '');
 </script>
 
-<div role="alert" class={`alert ${alert_cls}`}>
-	{#if style !== 'none'}
+<!--
+<div class="alert-info" />
+<div class="alert-success alert-outline" />
+<div class="alert-warning alert-dash" />
+<div class="alert-error alert-soft" />
+-->
+
+<div role="alert" class={`alert ${alert_cls} ${style_cls}`.trim()}>
+	{#if style === 'none'}
 		{@render icon(type)}
 	{/if}
 	{@render children()}
