@@ -4,12 +4,12 @@
 
 {#each items as item}
 	{#if item.link}
-		<li><a href={item.link}>{item.title}</a></li>
+		<li><a class:menu-active={item.active()} href={item.link}>{item.title}</a></li>
 	{/if}
 	{#if item.children}
 		<li>
 			<details>
-				<summary>{item.title}</summary>
+				<summary class:menu-active={item.active()}>{item.title}</summary>
 				<ul class="p-2 bg-base-100 w-40">
 					{#each item.children as child}
 						{#if child.link}

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import NavItems from '$components/nav_items.svelte';
 	import ThemeSwitcher from '$components/theme_switcher.svelte';
 
@@ -7,25 +8,16 @@
 	interface NavItem {
 		title: string;
 		link?: string;
+		active: () => boolean;
 		children?: NavItem[];
 	}
 	const navItems: NavItem[] = [
 		{
 			title: 'Home',
-			link: '/'
-		},
-		{
-			title: 'Test',
-			children: [
-				{
-					title: 'Item 1',
-					link: '#'
-				},
-				{
-					title: 'Item 2',
-					link: '#'
-				}
-			]
+			link: '/',
+			active: (): boolean => {
+				return '/' === page.url.pathname;
+			}
 		}
 	];
 </script>
