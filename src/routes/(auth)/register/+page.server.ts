@@ -1,5 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit';
-import { message, superValidate } from 'sveltekit-superforms';
+import { message, setMessage, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { z } from 'zod';
 
@@ -32,7 +32,8 @@ export const actions = {
         }
         catch (err: any) {
             console.error(err)
-            return message(form, 'Something went wrong while trying to create your account.')
+            setMessage(form, err.message)
+            return fail(400, { form });
         }
 
         return redirect(303, '/login');

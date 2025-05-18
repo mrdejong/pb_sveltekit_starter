@@ -3,11 +3,23 @@
 	import { onMount } from 'svelte';
 	import { superForm } from 'sveltekit-superforms/client';
 	import Field from '../../../components/form/field.svelte';
+	import Alert from '$components/feedback/alert.svelte';
+	import { browser } from '$app/environment';
+	import { goto } from '$app/navigation';
 
 	let { data } = $props();
 
+	let isFail = $state(false);
+
 	const { form, errors, message, enhance } = superForm(data.form, {
-		applyAction: false
+		applyAction: false,
+		onResult(event) {
+			if (event.result.status && event.result.status === 400) isFail = true;
+			if (event.result.type === 'redirect' && browser) goto(event.result.location);
+		},
+		onError() {
+			isFail = true;
+		}
 	});
 
 	onMount(() => {
@@ -21,7 +33,11 @@
 	use:enhance
 >
 	{#if $message}
-		<div>{$message}</div>
+		{#if isFail}
+			<Alert type="error">{$message}</Alert>
+		{:else}
+			<Alert type="info">{$message}</Alert>
+		{/if}
 	{/if}
 
 	<Field type="text" bind:value={$form.name} name="name" errors={$errors.name} label="Name" />
