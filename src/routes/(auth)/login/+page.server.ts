@@ -1,5 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit';
-import { message, setMessage, superValidate } from 'sveltekit-superforms';
+import { setMessage, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { z } from 'zod';
 
