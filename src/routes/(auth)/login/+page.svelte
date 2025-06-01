@@ -11,11 +11,9 @@
 
 	let isFail = $state(false);
 
-	const { form, errors, message, enhance } = superForm(data.form, {
-		applyAction: false,
+	let { form, errors, message, enhance } = superForm(data.form, {
 		onResult(event) {
 			if (event.result.status === 400) isFail = true;
-			if (event.result.type === 'redirect' && browser) goto(event.result.location);
 		}
 	});
 

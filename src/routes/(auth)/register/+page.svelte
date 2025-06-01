@@ -11,16 +11,7 @@
 
 	let isFail = $state(false);
 
-	const { form, errors, message, enhance } = superForm(data.form, {
-		applyAction: false,
-		onResult(event) {
-			if (event.result.status && event.result.status === 400) isFail = true;
-			if (event.result.type === 'redirect' && browser) goto(event.result.location);
-		},
-		onError() {
-			isFail = true;
-		}
-	});
+	let { form, errors, message, enhance } = superForm(data.form);
 
 	onMount(() => {
 		auth_title.set('Register a new account');
