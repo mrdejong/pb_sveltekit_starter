@@ -8,7 +8,7 @@
 
 	let { data } = $props();
 
-	const { form, errors, message } = superForm(data.form);
+	let { form, errors, message } = superForm(data.form);
 
 	onMount(() => {
 		auth_title.set('Reset password');
