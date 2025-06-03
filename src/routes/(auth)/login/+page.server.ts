@@ -30,6 +30,6 @@ export const actions = {
             return fail(400, { form })
         }
 
-        return redirect(303, '/');
+        return redirect(303, '/db');
     }
 }
