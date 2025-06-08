@@ -16,7 +16,7 @@ const passwordSchema = z.object({
     if (password !== confirmPassword) {
         ctx.addIssue({
             code: 'custom',
-            message: 'Password are not matching',
+            message: 'Passwords do not match',
             path: ['confirmPassword']
         })
     }

@@ -16,7 +16,7 @@
 	{/if}
 
 	<form method="POST" enctype="multipart/form-data" id="account-form" use:enhance>
-		<Field name="name" errors={$errors.name} label="You're name" bind:value={$form.name} />
+		<Field name="name" errors={$errors.name} label="Your name" bind:value={$form.name} />
 
 		<input type="file" class="file-input" name="avatar" bind:value={$form.avatar} />
 

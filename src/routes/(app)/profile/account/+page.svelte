@@ -26,8 +26,8 @@
 		confirm the change.
 	</p>
 	<p>
-		If you do not confirm your email address change you still be able to login with the current
-		email address.
+		If you do not confirm your email address change, you will still be able to log in with your
+		current email address.
 	</p>
 
 	{#if $email_message}
