@@ -14,8 +14,6 @@ export const handle = async ({ event, resolve }) => {
     const cookie = event.request.headers.get('cookie') || '';
     const pb = new PocketBase(url);
 
-    event.locals.users = pb.collection('users');
-
     event.locals.pb = pb
     pb.authStore.loadFromCookie(cookie);
 
