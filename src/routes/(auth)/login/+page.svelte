@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-	import { goto } from '$app/navigation';
 	import Alert from '$components/feedback/alert.svelte';
 	import Field from '$components/form/field.svelte';
 	import { auth_title } from '$lib/store';
