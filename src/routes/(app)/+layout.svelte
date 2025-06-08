@@ -12,7 +12,7 @@
 	let avatar = $derived.by(() => {
 		if (user.avatar === '')
 			return `https://ui-avatars.com/api/?format=svg&name=${user.name}&background=random`;
-		return 'https://ui-avatars.com/api/?format=svg&name=NO&background=ff0000';
+		return user.avatar;
 	});
 
 	let logoutForm: HTMLFormElement;
@@ -85,7 +85,7 @@
 						class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
 					>
 						<li>
-							<a href="/account">Account settings</a>
+							<a href="/profile">Profile settings</a>
 						</li>
 						<li>
 							<a href="/" onclick={() => logoutForm.submit()}>Logout</a>
