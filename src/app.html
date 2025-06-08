@@ -6,8 +6,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
     <script>
       const item = localStorage.getItem('dark-mode');
+      const h = document.querySelector('html');
+
       if (item !== null && item === 'true') {
-        const h = document.querySelector('html');
         h.dataset['theme'] = 'nord-dark';
       }
       else {
